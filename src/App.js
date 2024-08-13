@@ -23,9 +23,8 @@ import ViewApplications from './Components/ViewApplications';
 import ApplicationDetails from './Components/ApplicationDetails';
 import Courses from './Components/Courses';
 import ApplyJobForm from './Components/ApplyJobForm'; 
-import EmployerList from './Components/EmployerList';
 import EmployerDetails from './Components/EmployerDetails';
-import CourseDetails from './Components/CourseDetails';
+
 import { UserProvider } from './Components/UserContext';
 import { JobProvider } from './Components/JobContext';
 import PrivacyPolicy from './Components/PrivacyPolicy';
@@ -56,7 +55,6 @@ const App = () => {
               <Route path="/apply-job/:jobId" element={<ApplyJobForm apiUrl={apiUrl} />} />
               <Route path="/job-details/:jobId" element={<JobDetails apiUrl={apiUrl} />} />
               <Route path="/courses" element={<Courses apiUrl={apiUrl}/>} />
-              <Route path="/courses/:courseId" element={<CourseDetails />} />
               <Route path="/saved" element={<SavedJobs apiUrl={apiUrl} />} />
               <Route path="/applied" element={<AppliedJobs apiUrl={apiUrl} />} />
               <Route path="/student/profile/:userID" element={<Profile apiUrl={apiUrl} />} /> {/* Add student profile route */}
@@ -67,7 +65,6 @@ const App = () => {
         
               <Route path="/employer/view-applications/:jobId" element={<ViewApplications apiUrl={apiUrl} />} />
               <Route path="/employer/application-details/:applicationId" element={<ApplicationDetails apiUrl={apiUrl} />} />
-              <Route path="/employers" element={<EmployerList apiUrl={apiUrl} />} />
               <Route path="/employers/:employerId" element={<EmployerDetails apiUrl={apiUrl} />} />
               <Route path="/employer/profile/:userID" element={<Profile apiUrl={apiUrl} />} /> {/* Add employer profile route */}
 

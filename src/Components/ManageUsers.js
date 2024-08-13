@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import NavbarAdmin from './NavbarAdmin.js';
 import './ManageUsers.css';
 
 const ManageUsers = ({ apiUrl }) => {
@@ -51,6 +52,7 @@ const ManageUsers = ({ apiUrl }) => {
 
   return (
     <div className="container">
+      <NavbarAdmin />
       <h1 className="header">Manage Users</h1>
       <p>Here is the list of all the users:</p>
       {message && <p className="message">{message}</p>}

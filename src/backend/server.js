@@ -401,99 +401,78 @@ app.post('/apply-job/:jobId', upload.fields([{ name: 'resume' }, { name: 'coverL
     }
 });
 
-// Route to get all applications for a specific job
 app.get('/applications/job/:jobId', async (req, res) => {
     const { jobId } = req.params;
-    const { userId } = req.query; // Get userId from query parameters
-
-    if (!jobId || !userId) {
-        return res.status(400).json({ message: 'Job ID and User ID are required.' });
-    }
-
-    try {
-        // Query to ensure that the applications are fetched only for jobs posted by the user
-        const query = `
-            SELECT a.* FROM applications a
-            JOIN jobs j ON a.jobId = j.id
-            WHERE a.jobId = ? AND j.user_id = ?
-        `;
-
-        db.execute(query, [jobId, userId], (err, results) => {
-            if (err) {
-                console.error('Error fetching applications:', err.stack);
-                return res.status(500).json({ message: 'Internal server error while fetching applications.' });
-            }
-
-            if (results.length === 0) {
-                return res.status(404).json({ message: 'No applications found for this job.' });
-            }
-
-            res.json(results);
-        });
-    } catch (error) {
-        console.error('Error processing request:', error);
-        res.status(500).json({ message: 'Internal server error.' });
-    }
-});
-
-// Route to get details of a specific application
-app.get('/applications/:applicationId', async (req, res) => {
-    const { applicationId } = req.params;
-    const { userId } = req.query; // Optional: Get userId from query parameters for security
-
-    if (!applicationId) {
-        return res.status(400).json({ message: 'Application ID is required.' });
-    }
+    const { userId } = req.query;
 
     try {
         const query = `
-            SELECT a.* FROM applications a
-            JOIN jobs j ON a.jobId = j.id
-            WHERE a.id = ? ${userId ? 'AND j.user_id = ?' : ''}
+            SELECT * FROM applications
+            WHERE jobId = ? AND userId = ?
         `;
+        const [results] = await db.promise().execute(query, [jobId, userId]);
 
-        const params = userId ? [applicationId, userId] : [applicationId];
+        if (results.length === 0) {
+            return res.status(404).json({ message: 'No applications found for this job.' });
+        }
 
-        db.execute(query, params, (err, results) => {
-            if (err) {
-                console.error('Error fetching application details:', err.stack);
-                return res.status(500).json({ message: 'Internal server error while fetching application details.' });
-            }
-
-            if (results.length === 0) {
-                return res.status(404).json({ message: 'Application not found.' });
-            }
-
-            res.json(results[0]);
-        });
+        res.json(results);
     } catch (error) {
-        console.error('Error processing request:', error);
-        res.status(500).json({ message: 'Internal server error.' });
+        console.error('Error fetching applications:', error);
+        res.status(500).json({ message: 'Error fetching applications.' });
     }
 });
-  
-// Example route for updating application status
-app.patch('/applications/:applicationId/status', (req, res) => {
+
+
+app.get('/applications/job/:jobId', async (req, res) => {
+    const { jobId } = req.params;
+
+    try {
+        if (!jobId) {
+            return res.status(400).json({ message: 'Job ID is required.' });
+        }
+
+        const query = `
+            SELECT * FROM applications
+            WHERE jobId = ?
+        `;
+        const [results] = await db.promise().execute(query, [jobId]);
+
+        if (results.length === 0) {
+            return res.status(404).json({ message: 'No applications found for this job.' });
+        }
+
+        res.json(results);
+    } catch (error) {
+        console.error('Error fetching applications:', error);
+        res.status(500).json({ message: 'Internal server error while fetching applications.' });
+    }
+});
+
+app.patch('/applications/:applicationId/status', async (req, res) => {
     const { applicationId } = req.params;
     const { status } = req.body;
-  
-    // Ensure the status is one of the allowed values
-    if (!['Pending', 'Accepted', 'Rejected'].includes(status)) {
-      return res.status(400).json({ message: 'Invalid status value.' });
+
+    if (!['Accepted', 'Rejected', 'Pending'].includes(status)) {
+        return res.status(400).json({ message: 'Invalid status value.' });
     }
-  
-    const query = 'UPDATE applications SET status = ? WHERE id = ?';
-    db.execute(query, [status, applicationId], (err, results) => {
-      if (err) {
-        return res.status(500).json({ message: 'Error updating application status.' });
-      }
-      if (results.affectedRows === 0) {
-        return res.status(404).json({ message: 'Application not found.' });
-      }
-      res.json({ message: 'Application status updated successfully!' });
-    });
-  });
-  
+
+    try {
+        const query = 'UPDATE applications SET status = ? WHERE id = ?';
+        const [result] = await db.promise().execute(query, [status, applicationId]);
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ message: 'Application not found.' });
+        }
+
+        res.json({ message: 'Application status updated successfully!' });
+    } catch (error) {
+        console.error('Error updating application status:', error);
+        res.status(500).json({ message: 'Error updating application status.' });
+    }
+});
+
+
 
   // Route to fetch applied jobs for a user
 app.get('/applied-jobs', async (req, res) => {
@@ -527,45 +506,9 @@ app.get('/applied-jobs', async (req, res) => {
 });
 
 
-// Route to fetch all employers
-app.get('/employers', (req, res) => {
-    const query = `
-        SELECT employers.*, users.email 
-        FROM employers 
-        JOIN users ON employers.user_id = users.id
-    `;
 
-    db.execute(query, (err, results) => {
-        if (err) {
-            console.error('Error fetching employers:', err.stack);
-            return res.status(500).json({ message: 'Error fetching employers.' });
-        }
-        res.json(results);
-    });
-});
 
-// Route to fetch employer details including email from users table
-app.get('/employers/:employerId', (req, res) => {
-    const { employerId } = req.params;
-    const query = `
-        SELECT employers.*, users.email 
-        FROM employers 
-        JOIN users ON employers.user_id = users.id 
-        WHERE employers.user_id = ?
-    `;
 
-    db.execute(query, [employerId], (err, results) => {
-        if (err) {
-            console.error('Error fetching employer details:', err.stack);
-            return res.status(500).json({ message: 'Error fetching employer details.' });
-        }
-        if (results.length > 0) {
-            res.json(results[0]);
-        } else {
-            res.status(404).json({ message: 'Employer not found.' });
-        }
-    });
-});
 
 // Add a new course
 app.post('/admin/courses', (req, res) => {

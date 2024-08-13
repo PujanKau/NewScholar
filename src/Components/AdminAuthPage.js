@@ -34,7 +34,7 @@ const AdminAuthPage = ({ apiUrl }) => {
           name: result.name,
           initials: result.name.match(/\b(\w)/g).join(''),
         });
-        navigate('/admin/dashboard/:userId');
+        navigate(`/admin/dashboard/${result.userId}`);
       } else {
         const errorMessage = await response.text();
         setError(errorMessage);
@@ -52,34 +52,36 @@ const AdminAuthPage = ({ apiUrl }) => {
   };
 
   return (
-    <div className="auth-container">
-      <h1>Admin Login</h1>
-      <form onSubmit={handleAuth}>
-        <div className="form-group">
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit">Login</button>
-      </form>
-      {showError && <CustomErrorMessage message={error} onClose={closeError} />}
+    <div className="auth-page">
+      <div className="auth-container">
+        <h1>Admin Login</h1>
+        <form onSubmit={handleAuth}>
+          <div className="form-group">
+            <label htmlFor="email">Email:</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="password">Password:</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+          <button type="submit">Login</button>
+        </form>
+        {showError && <CustomErrorMessage message={error} onClose={closeError} />}
+      </div>
     </div>
   );
 };

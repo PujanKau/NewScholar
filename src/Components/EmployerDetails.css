@@ -1,3 +1,4 @@
+/* Employer Details Container */
 .employer-details-container {
   padding: 20px;
   background-color: #ffffff; /* Optional: Add a background color */
@@ -11,26 +12,58 @@
   margin-bottom: 20px;
 }
 
+/* Job Listings */
 .job-listings {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
 }
 
+/* Job Card Styling */
 .job-card {
-  background-color: #f8f9fa;
+  background-color: #E2DAD6; /* Consistent accent color for the job card background */
   padding: 20px;
   border: 1px solid #dee2e6;
-  border-radius: 8px;
+  border-radius: 10px;
   width: 100%;
-  max-width: 300px;
+  max-width: 300px; /* Consistent maximum width for job cards */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Added box shadow for a subtle effect */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .job-card h3 {
   margin-top: 0;
   margin-bottom: 10px;
+  font-size: 1.4rem;
+  color: #2b3a67; /* Consistent dark blue color for job title */
+  font-weight: bold; /* Make the job title bold */
 }
 
 .job-card p {
   margin-bottom: 10px;
+  font-size: 1rem;
+  color: #2b3a67; /* Consistent dark blue color for job details */
+  font-weight: bold; /* Optional: Make the job details bold */
+}
+
+/* Job Card Link Styling */
+.job-card-link {
+  text-decoration: none;
+  color: #1f2a4d; /* Darker shade of blue for better visibility */
+  font-weight: bold;
+}
+
+.job-card-link:hover {
+  text-decoration: underline;
+}
+
+/* Responsive Design for Job Cards */
+@media (max-width: 768px) {
+  .job-listings {
+    justify-content: center;
+  }
+
+  .job-card {
+    width: 100%; /* Make the cards take full width on smaller screens */
+  }
 }

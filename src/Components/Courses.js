@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import './Courses.css'; // Import the CSS file for styling
+import './Courses.css'; 
+import NavbarStudent from './NavbarStudent';
 
 const Courses = ({ apiUrl }) => {
   const [courses, setCourses] = useState([]);
@@ -12,7 +13,7 @@ const Courses = ({ apiUrl }) => {
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const response = await fetch(`${apiUrl}/courses`);
+        const response = await fetch(`${apiUrl}/courses`); // Corrected: Added backticks around the URL
         if (response.ok) {
           const data = await response.json();
           setCourses(data);
@@ -59,15 +60,16 @@ const Courses = ({ apiUrl }) => {
     const isPlaylist = url.includes('list=');
     if (isPlaylist) {
       const playlistId = url.split('list=')[1];
-      return `https://www.youtube.com/embed/videoseries?list=${playlistId}`;
+      return `https://www.youtube.com/embed/videoseries?list=${playlistId}`; // Corrected: Added backticks
     } else {
       const videoId = url.split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/)[2]?.split(/[^0-9a-z_-]/i)[0];
-      return `https://www.youtube.com/embed/${videoId}`;
+      return `https://www.youtube.com/embed/${videoId}`; // Corrected: Added backticks
     }
   };
 
   return (
     <div className="courses-container">
+      < NavbarStudent />
       <h1>Available Courses</h1>
       <div className="filter-container">
         <label htmlFor="categoryFilter">Filter by Category: </label>

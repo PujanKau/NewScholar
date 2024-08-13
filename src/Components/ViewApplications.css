@@ -1,33 +1,180 @@
-.success-message {
-  background-color: #d4edda;
-  color: #155724;
-  border: 1px solid #c3e6cb;
-  padding: 15px;
-  margin-bottom: 20px;
-  border-radius: 5px;
-  text-align: center;
+/* General Page Styles */
+.applications-page {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  background-color: #F5EDED; /* Light background color */
 }
 
-.reject-button {
-  background-color: #dc3545;
+.applications-banner {
+  font-weight: 800;
   color: white;
-  border: none;
-  padding: 10px 15px;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  background-color: #6482AD; /* Primary color for banner */
+  padding: 10px 20px;
   border-radius: 5px;
-  cursor: pointer;
-  margin-right: 10px;
 }
 
-.reject-button:hover {
-  background-color: #c82333;
+.applications {
+  display: flex;
+  align-items: start;
+  justify-content: start;
+  background: linear-gradient(#7FA1C3, #E2DAD6); /* Gradient with the palette colors */
+  padding: 20px;
+  border-radius: 10px;
 }
 
-.details-link {
+/* Navbar Styles */
+.navbar-employer {
+  width: 100%;
+  background-color: #6482AD; /* Primary color for navbar */
+  padding: 10px 20px;
+  box-sizing: border-box;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.navbar-logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-logo {
+  height: 40px;
+  margin-right: 20px;
+}
+
+.navbar-menu {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-item {
+  display: inline-block;
+}
+
+.navbar-link {
+  color: white;
   text-decoration: none;
-  color: #007bff;
-  font-weight: bold;
+  font-size: 1.1rem;
+  font-weight: 600;
 }
 
-.details-link:hover {
+.navbar-actions {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-logout-button {
+  background-color: white;
+  color: #6482AD; /* Primary color for button text */
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: 2px solid #6482AD;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navbar-logout-button:hover {
+  background-color: #6482AD;
+  color: white;
+  border: 2px solid white;
+}
+
+/* Application Listings */
+.application-listings {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.application-card {
+  background-color: #E2DAD6; /* Light color for card background */
+  border: 1px solid #E2DAD6;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+  width: 300px;
+  box-sizing: border-box;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.application-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.application-card h4 {
+  font-size: 1.4rem;
+  color: #2b3a67; /* Darker color for text */
+}
+
+.application-card p {
+  font-size: 1rem;
+  color: #2b3a67;
+}
+
+/* Footer */
+.footer {
+  width: 100%;
+  max-width: 1200px;
+  margin: 20px auto 0;
+  background-color: #6482AD; /* Primary color for footer */
+  color: white;
+  text-align: center;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  font-family: 'Open Sans', sans-serif;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.footer p {
+  margin: 5px 0;
+}
+
+.footer a {
+  color: #F5EDED; /* Light color for footer links */
+  text-decoration: none;
+}
+
+.footer a:hover {
   text-decoration: underline;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  background-color: #F5EDED; /* Background color for consistency */
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.applications-page {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }

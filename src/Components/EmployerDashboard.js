@@ -9,6 +9,7 @@ const EmployerDashboard = ({ apiUrl }) => {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState('');
 
   useEffect(() => {
     const fetchJobs = async () => {
@@ -38,9 +39,9 @@ const EmployerDashboard = ({ apiUrl }) => {
         throw new Error('Failed to delete job');
       }
       setJobs(jobs.filter(job => job.id !== jobId));
+      setSuccessMessage('Job deleted successfully.');
     } catch (error) {
-      console.error('Error deleting job:', error);
-      alert('An error occurred while deleting the job. Please try again.');
+      setError(error.message || 'An error occurred while deleting the job.');
     }
   };
 
@@ -63,6 +64,7 @@ const EmployerDashboard = ({ apiUrl }) => {
         <div className="dashboard-actions">
           <Link to="/employer/post-job" className="action-button">Post Job</Link>
         </div>
+        {successMessage && <div className="success-message">{successMessage}</div>}
         <div className="job-listings">
           {jobs.map(job => (
             <div key={job.id} className="job-card">
@@ -70,7 +72,6 @@ const EmployerDashboard = ({ apiUrl }) => {
               <p><strong>Number of people to hire:</strong> {job.numPeople}</p>
               <p><strong>Location:</strong> {job.jobLocation}</p>
               <p><strong>Address:</strong> {job.streetAddress}</p>
-              <p><strong>Description:</strong> {job.companyDescription}</p>
               <div className="job-card-actions">
                 <Link to={`/employer/view-applications/${job.id}`} className="view-applications-button">View Applications</Link>
                 <button onClick={() => handleDelete(job.id)} className="delete-button">Delete</button>

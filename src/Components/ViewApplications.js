@@ -1,16 +1,14 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import './ViewApplications.css';
-import { UserContext } from './UserContext';
 
 const ViewApplications = ({ apiUrl }) => {
-  const { jobId } = useParams(); // Get jobId from the URL parameters
-  const { user } = useContext(UserContext); // Get user from UserContext
+  const { jobId } = useParams();
   const [applications, setApplications] = useState([]);
-  const [jobTitle, setJobTitle] = useState(''); // State to store job title
+  const [jobTitle, setJobTitle] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [successMessage, setSuccessMessage] = useState(''); // State for success message
+  const [successMessage, setSuccessMessage] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -21,7 +19,7 @@ const ViewApplications = ({ apiUrl }) => {
           throw new Error('Failed to fetch job details');
         }
         const jobData = await response.json();
-        setJobTitle(jobData.jobTitle); // Set the job title
+        setJobTitle(jobData.jobTitle);
       } catch (error) {
         setError(error.message);
       }
@@ -29,13 +27,7 @@ const ViewApplications = ({ apiUrl }) => {
 
     const fetchApplications = async () => {
       try {
-        if (!user.userId) {
-          throw new Error('User not authenticated');
-        }
-
-        // Fetch applications for the specific job and user
-        const response = await fetch(`${apiUrl}/applications/job/${jobId}?userId=${user.userId}`);
-
+        const response = await fetch(`${apiUrl}/applications/job/${jobId}`);
         if (!response.ok) {
           throw new Error('Failed to fetch applications');
         }
@@ -50,7 +42,7 @@ const ViewApplications = ({ apiUrl }) => {
 
     fetchJobDetails();
     fetchApplications();
-  }, [apiUrl, jobId, user.userId]);
+  }, [apiUrl, jobId]);
 
   const handleRejectApplication = async (applicationId) => {
     try {
@@ -62,7 +54,7 @@ const ViewApplications = ({ apiUrl }) => {
         setSuccessMessage('Application rejected successfully.');
         setTimeout(() => {
           navigate(`/employer/view-applications/${jobId}`);
-        }, 2000); // Redirect after 2 seconds
+        }, 2000);
       } else {
         const errorData = await response.json();
         setError(errorData.message || 'Failed to reject application.');
@@ -97,12 +89,6 @@ const ViewApplications = ({ apiUrl }) => {
             <h3>{app.firstName} {app.lastName}</h3>
             <p><strong>Email:</strong> {app.email}</p>
             <p><strong>Desired Compensation:</strong> {app.desiredCompensation}</p>
-            <button
-              className="reject-button"
-              onClick={() => handleRejectApplication(app.id)}
-            >
-              Reject
-            </button>
             <Link to={`/employer/application-details/${app.id}`} className="details-link">
               View Details
             </Link>

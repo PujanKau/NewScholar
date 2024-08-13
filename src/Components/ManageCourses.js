@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import NavbarAdmin from './NavbarAdmin.js';
 import './ManageCourses.css';
 
 const ManageCourses = ({ apiUrl }) => {
@@ -52,6 +53,7 @@ const ManageCourses = ({ apiUrl }) => {
 
   return (
     <div className="container">
+      <NavbarAdmin />
       <h1 className="header">Manage Courses</h1>
       {message && <p className="message">{message}</p>}
       

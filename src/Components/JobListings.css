@@ -1,7 +1,19 @@
+.job-listings-container {
+  width: 100%;
+  background-color: #f5eded; /* Light background to match the color palette */
+  padding: 20px;
+}
+
+.dashboard-main {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 .job-listings-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 10px 20px;
 }
 
 .job-listings-links {
@@ -10,11 +22,127 @@
 }
 
 .job-listings-link {
-  color: #0056b3;
+  color: white; /* White font color */
   text-decoration: none;
   font-weight: bold;
+  background-color: #2b3a67; /* Dark blue background color matching the color palette */
+  padding: 8px 16px;
+  border-radius: 5px;
+  border: 2px solid #7FA1C3; /* Box pattern with accent color */
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .job-listings-link:hover {
+  background-color: #7FA1C3; /* Hover effect for background */
+  color: #2b3a67; /* Dark blue text color on hover */
+  text-decoration: none;
+}
+
+.job-filters {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px; /* Space between each filter element */
+  margin-bottom: 20px;
+}
+
+.job-filters input[type="text"],
+.job-filters select {
+  padding: 10px;
+  font-size: 1rem;
+  border: 2px solid #7FA1C3;
+  border-radius: 5px;
+  width: 200px; /* Adjust width as needed */
+  background-color: #e2dad6;
+  color: #2b3a67; /* Dark blue text color */
+  margin-right: 10px; /* Spacing between filter elements */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.job-filters input[type="text"]::placeholder {
+  color: #7FA1C3; /* Accent color for placeholder text */
+}
+
+.job-filters input[type="text"]:focus,
+.job-filters select:focus {
+  outline: none;
+  border-color: #2b3a67; /* Dark blue border on focus */
+  box-shadow: 0 0 5px rgba(43, 58, 103, 0.5);
+}
+
+.search-button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+  background-color: #2b3a67; /* Dark blue background */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin-left: 10px; /* Spacing to separate from filter elements */
+}
+
+.search-button:hover {
+  background-color: #7FA1C3; /* Lighter accent color on hover */
+  transform: translateY(-3px); /* Slight lift effect on hover */
+}
+
+.search-button:active {
+  transform: translateY(0); /* Reset the lift effect when clicked */
+}
+
+.job-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Adds space between the cards */
+  justify-content: flex-start; /* Aligns cards to the left; change to 'center' for center alignment */
+}
+
+.job-card {
+  background-color: #E2DAD6; /* Accent color for the job card background */
+  border: 1px solid #E2DAD6; /* Accent color for card border */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 16px; /* Adjusted margin to maintain spacing */
+  width: 300px; /* Adjust width to control card size */
+  box-sizing: border-box;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: left; /* Ensures content is aligned to the left */
+}
+
+.job-card-body h3 {
+  font-size: 1.4rem;
+  color: #1f2a4d; /* Darker shade of blue for better visibility */
+  margin: 0 0 8px 0; 
+  font-weight: bold; /* Optional: Makes the job title bold */
+}
+
+.job-card-body p {
+  font-size: 1rem;
+  color: #1f2a4d; /* Darker shade of blue for better visibility */
+  margin: 4px 0;
+  font-weight: bold; /* Optional: Makes the job details bold */
+}
+
+.job-card-link {
+  text-decoration: none;
+  color: #1f2a4d; /* Darker shade of blue for better visibility */
+  font-weight: bold;
+}
+
+.job-card-link:hover {
   text-decoration: underline;
+}
+
+/* Responsive design to ensure cards stack on smaller screens */
+@media (max-width: 768px) {
+  .job-cards {
+    justify-content: center;
+  }
+
+  .job-card {
+    width: 100%; /* Make the cards take full width on smaller screens */
+  }
 }

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import NavbarAdmin from './NavbarAdmin';
 import './AdminDashboard.css';
 
 const AdminDashboard = ({ apiUrl }) => {
@@ -39,7 +40,9 @@ const AdminDashboard = ({ apiUrl }) => {
   }, [apiUrl]);
 
   return (
-    <div className="dashboard-container">
+   
+    <div className="dashboard-container"> 
+    <NavbarAdmin />
       <header className="header">
         <h1>Admin Dashboard</h1>
       </header>
@@ -62,29 +65,7 @@ const AdminDashboard = ({ apiUrl }) => {
           </div>
         </section>
         <section className="details-table">
-          <h2>Recent Activities</h2>
-          {recentActivities.length > 0 ? (
-            <table>
-              <thead>
-                <tr>
-                  <th>Activity</th>
-                  <th>User Email</th>
-                  <th>Date and Time</th>
-                </tr>
-              </thead>
-              <tbody>
-                {recentActivities.map((activity, index) => (
-                  <tr key={index}>
-                    <td>{activity.activity_type === 'sign_in' ? 'Sign In' : 'Sign Up'}</td>
-                    <td>{activity.email}</td>
-                    <td>{new Date(activity.timestamp).toLocaleString()}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          ) : (
-            <p>No recent activities found.</p>
-          )}
+          
         </section>
       </main>
     </div>

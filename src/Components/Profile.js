@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { UserContext } from './UserContext';
+import NavbarStudent from './NavbarStudent';
 import './Profile.css';
 
 const Profile = ({ apiUrl }) => {
@@ -87,6 +88,7 @@ const Profile = ({ apiUrl }) => {
 
   return (
     <div className="profile-container">
+      < NavbarStudent />
       <div className="profile-picture-container">
         <img
           src={profilePicturePreview}

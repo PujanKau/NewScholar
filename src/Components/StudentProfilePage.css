@@ -1,8 +1,12 @@
+*{
+  background:linear-gradient(#003366,white);
+
+}
 .profile-page {
     max-width: 600px;
     margin: 50px auto;
     padding: 20px;
-    background-color: #f5f5f5;
+  background:linear-gradient(#003366,white);
     border-radius: 10px;
   }
   

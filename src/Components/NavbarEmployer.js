@@ -40,10 +40,10 @@ const NavbarEmployer = ({ apiUrl }) => {
   return (
     <nav className="navbar navbar-employer">
       <div className="navbar-logo">
-        <img src="/path/to/logo.png" alt="Career Connection Logo" />
+        <img src="/logo.png" alt="Career Connection Logo" />
       </div>
       <div className="navbar-links">
-        <Link to="/employer/dashboard">Dashboard</Link>
+        <Link to="/employer/dashboard/:userId">Dashboard</Link>
         <Link to="/employer/post-job">Post Job</Link>
       </div>
       <div className="navbar-profile">

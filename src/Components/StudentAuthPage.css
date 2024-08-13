@@ -51,20 +51,20 @@
   margin-top: 10px;
   border: none;
   border-radius: 5px;
-  background-color: #007bff;
+  background-color: #003366;
   color: white;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
 .auth-page button:hover {
-  background-color: #0056b3;
+  background-color: #003366;
   color: #ffffff;
 }
 
 .auth-page .toggle-button {
   background-color: transparent;
-  color: #007bff;
+  color:#003366;
   border: none;
   margin-top: 15px;
   cursor: pointer;

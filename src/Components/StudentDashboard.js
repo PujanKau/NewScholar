@@ -26,6 +26,10 @@ const StudentDashboard = () => {
         </div>
         </div>
       </main>
+      <footer className="footer">
+        <p>Powered by ScholarSpace</p>
+        <p><a href="/privacy-policy">Privacy Policy</a></p>
+      </footer>
     </div>
   );
 };

@@ -6,9 +6,7 @@ import './JobCard.css';
 const JobCard = ({ job }) => {
   return (
     <div className="job-card">
-      <div className="job-card-header">
-        <img src={job.companyLogo || '/default-logo.png'} alt={`${job.companyName} logo`} />
-      </div>
+      
       <div className="job-card-body">
         <h3>{job.jobTitle}</h3>
         <p>{job.jobLocation}</p>

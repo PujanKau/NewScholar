@@ -178,12 +178,8 @@ const JobDetails = ({ apiUrl }) => {
                 <td>{jobDetails.travelFrequency}</td>
               </tr>
               <tr>
-                <td><strong>Employee Group:</strong></td>
-                <td>{jobDetails.employeeGroup}</td>
-              </tr>
-              <tr>
-                <td><strong>Company Description:</strong></td>
-                <td>{jobDetails.companyDescription}</td>
+                <td><strong>Job Description:</strong></td>
+                <td>{jobDetails.jobDescription}</td>
               </tr>
             </tbody>
           </table>
